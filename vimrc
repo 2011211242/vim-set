@@ -55,7 +55,8 @@ set laststatus=2                 " 总显示最后一个窗口的状态行
 set t_Co=256                     " 开启vim 256色
 
 set background=dark
-colorscheme solarized            " 设置配色方案
+colorscheme industry
+" colorscheme solarized            " 设置配色方案
 " ----------------------------------------------------------------------------------
 
 " ----------------------------------------------------------------------------------
@@ -146,7 +147,7 @@ let g:cpp_experimental_simple_template_highlight = 1    " 突出显示模板
 
 " ----------------------------------------------------------------------------------
 " DoxygenToolkit
-let g:DoxygenToolkit_briefTag_funcName = "yes"
+let g:DoxygenToolkit_briefTag_funcName = "Yes"
 
 " for C++ style, change the '@' to '\'
 let g:DoxygenToolkit_commentType = "C++"
@@ -161,9 +162,9 @@ let g:DoxygenToolkit_authorTag = "\\author "
 let g:DoxygenToolkit_versionTag = "\\version "
 let g:DoxygenToolkit_blockTag = "\\name "
 let g:DoxygenToolkit_classTag = "\\class "
-let g:DoxygenToolkit_authorName = "Qianyi.lh, qianyi.lh@alibaba-inc.com"
-"let g:doxygen_enhanced_color = 1
-"let g:load_doxygen_syntax = 1
+let g:DoxygenToolkit_authorName = "andrew"
+let g:doxygen_enhanced_color = 1
+let g:load_doxygen_syntax = 1
 " ----------------------------------------------------------------------------------
 
 " ----------------------------------------------------------------------------------
@@ -179,6 +180,7 @@ let os=substitute(system('uname'), '\n', '', '')
 if os == 'Darwin' || os == 'Mac'
     let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib"
 elseif os == 'Linux'
+    let g:clang_library_path="/usr/lib/llvm-8/lib/libclang.so"
 
 endif
 
@@ -214,3 +216,11 @@ endf
 map f :call Mydict()<CR><C-j><C-l>
 " ----------------------------------------------------------------------------------
 
+" ----------------------------------------------------------------------------------
+" 光标回到上次打开的位置
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+set encoding=utf-8
